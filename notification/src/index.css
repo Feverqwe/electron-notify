@@ -1,0 +1,71 @@
+body {
+    overflow: hidden;
+    -webkit-user-select: none;
+}
+
+#container {
+    background-color: rgb(240, 240, 240);
+    border: 1px solid rgb(204, 204, 204);
+    font-family: Arial;
+    font-size: 12px;
+    line-height: 15px;
+    overflow: hidden;
+    padding: 8px;
+    position: relative;
+    height: 37px;
+    width: 318px;
+    border-radius: 5px;
+}
+
+#appIcon {
+    float: left;
+    height: 40px;
+    margin-right: 10px;
+    overflow: hidden;
+    width: 40px;
+    margin-top: 6px;
+}
+
+#image {
+    float: right;
+    height: 40px;
+    margin-left: 10px;
+    overflow: hidden;
+    width: 40px;
+    display: none;
+}
+
+span {
+    margin-bottom: 4px;
+}
+
+#text {
+    display: flex;
+    flex-direction: column;
+}
+
+#title {
+    font-size: 16px;
+}
+
+#subtitle {
+    font-size: 13px;
+}
+
+#message {
+    cursor: default;
+    margin: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+
+#close {
+    color: rgb(150, 150, 150);
+    font-size: 11px;
+    position: absolute;
+    right: 3px;
+    top: 1px;
+    cursor: pointer;
+}

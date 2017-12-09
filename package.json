@@ -1,22 +1,21 @@
 {
   "name": "electron-notify",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "description": "Nice and simple notifications for Electron apps",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Hank Bao",
-  "license": "MIT",
-  "dependencies": {
-    "async": "^0.9.0",
-    "lodash": "^2.4.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/hankbao/electron-notify"
-  },
   "devDependencies": {
-    "eslint": "^0.21.2"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "clean-css-loader": "^0.1.4",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.7",
+    "html-webpack-inline-source-plugin": "0.0.9",
+    "html-webpack-plugin": "^2.30.1",
+    "style-loader": "^0.19.0",
+    "uglifyjs-webpack-plugin": "^1.0.0-beta.3",
+    "webpack": "^3.7.1",
+    "webpack-dev-server": "^2.9.1",
+    "webpack-stream": "^4.0.0"
   }
 }
