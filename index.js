@@ -48,8 +48,8 @@ const config = {
   padding: 10,
   borderRadius: 5,
   displayTime: 6000,
-  animationSteps: 12,
-  animationStepMs: 16,
+  animationSpeed: 700,
+  animationFps: 60,
   appIcon: null,
   defaultStyleContainer: {
     padding: 8
@@ -300,20 +300,30 @@ function moveNotificationAnimation(winId, i) {
   const notificationWindow = BrowserWindow.fromId(winId);
   if (!notificationWindow) return;
 
-  const newY = config.lowerRightCorner.y - config.totalHeight * (i + 1);
-  const startY = notificationWindow.getPosition()[1];
-  const step = (newY - startY) / config.animationSteps;
-  let curStep = 1;
+  const [posX, posY] =  notificationWindow.getPosition();
+  const newPosY = config.lowerRightCorner.y - config.totalHeight * (i + 1);
+  const delta = Math.max(newPosY, posY) - Math.min(newPosY, posY);
+  const direction = newPosY > posY ? 1 : -1;
+  const startTime = Date.now();
+  const endTime = startTime + delta / config.animationSpeed * 1000;
+  const timeDelta = endTime - startTime;
+  const speed = 1000 / config.animationFps;
+  if (!isFinite(timeDelta) || timeDelta === 0) return;
+
   const next = function () {
     const notificationWindow = BrowserWindow.fromId(winId);
     if (!notificationWindow) return;
 
-    if (curStep === config.animationSteps) {
-      notificationWindow.setPosition(config.firstPos.x, newY);
-    } else {
-      notificationWindow.setPosition(config.firstPos.x, Math.trunc(startY + curStep * step));
-      curStep++;
-      return new Promise(resolve => setTimeout(resolve, config.animationStepMs)).then(next);
+    let percents = 100 / timeDelta * (Date.now() - startTime);
+    if (percents > 100) {
+      percents = 100;
+    }
+    const deltaPosY = Math.trunc(delta / 100 * percents);
+    if (deltaPosY > 0) {
+      notificationWindow.setPosition(posX, posY + deltaPosY * direction);
+    }
+    if (percents < 100) {
+      return new Promise(resolve => setTimeout(resolve, speed)).then(next);
     }
   };
   return Promise.resolve().then(next);
