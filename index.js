@@ -310,6 +310,7 @@ function moveNotificationAnimation(winId, i) {
   const speed = 1000 / config.animationFps;
   if (!isFinite(timeDelta) || timeDelta === 0) return;
 
+  let lastDeltaPosY = 0;
   const next = function () {
     const notificationWindow = BrowserWindow.fromId(winId);
     if (!notificationWindow) return;
@@ -319,7 +320,8 @@ function moveNotificationAnimation(winId, i) {
       percents = 100;
     }
     const deltaPosY = Math.trunc(delta / 100 * percents);
-    if (deltaPosY > 0) {
+    if (lastDeltaPosY !== deltaPosY) {
+      lastDeltaPosY = deltaPosY;
       notificationWindow.setPosition(posX, posY + deltaPosY * direction);
     }
     if (percents < 100) {
